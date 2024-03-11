@@ -11,3 +11,7 @@ This is why I made sure to use .my-root-account-class instead of .my-root-class 
 .title{
 	padding: 0;
 }
+
+.content-body{
+	min-height: 95svh;
+}
