@@ -15,3 +15,11 @@ This is why I made sure to use .my-root-account-class instead of .my-root-class 
 .content-body{
 	min-height: 95svh;
 }
+
+@font-face {
+	font-family: Titillium;
+	src: url("./assets/fonts/Titillium_Web/titillium-web-v10-latin-ext_latin-700italic.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+  }

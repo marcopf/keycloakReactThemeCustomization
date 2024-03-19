@@ -71,7 +71,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 </div>
               </div>
             </div>
-            <div className="it-header-navbar-wrapper primary-bg-c8">
+            <div className="it-header-navbar-wrapper primary-bg-a8">
   <div className="container">
     <div className="row">
       <div className="col-12">
@@ -135,15 +135,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 <span className="kc-feedback-text">{message.summary}</span>
                             </div>
                         )}
-                        <div className="row mt-3">
-                            <div className="col-12">
-                                <div className="card-wrapper p-5 shadow">
-                                    <div className="card">
-                                        <div className="card-body">
-                                            {children}
-                                        </div>
-                                    </div>
-                                </div>
+                        <div className="row justify-content-center">
+                            <div className="col-6 rounded-3 m-5 p-4 shadow text-primary">
+                              {children}
                             </div>
                         </div>
                     </div>
