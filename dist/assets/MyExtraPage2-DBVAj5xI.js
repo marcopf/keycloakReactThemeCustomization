@@ -1,2 +1,0 @@
-import{j as e}from"./index-D3T5C0V5.js";function l(o){const{kcContext:s,i18n:t,doUseDefaultCss:n,Template:r,classes:a}=o;return console.log(`TODO: Do something with: ${s.someCustomValue}`),e.jsx(r,{kcContext:s,i18n:t,doUseDefaultCss:n,classes:a,headerNode:e.jsxs(e.Fragment,{children:["Header ",e.jsx("i",{children:"text"})]}),infoNode:e.jsx("span",{children:"footer"}),children:e.jsx("form",{children:s.someCustomValue})})}export{l as default};
-//# sourceMappingURL=MyExtraPage2-DBVAj5xI.js.map

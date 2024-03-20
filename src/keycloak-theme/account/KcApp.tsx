@@ -5,11 +5,17 @@ import type { KcContext } from "./kcContext";
 import { useI18n } from "./i18n";
 import Template from "./Template";
 
+//IMPORT aggiunti
 const Password = lazy(() => import("./pages/Password"));
 const Account = lazy(() => import("./pages/Account"));
 const Applications = lazy(() => import("./pages/Applications"));
 const Sessions = lazy(() => import("./pages/Sessions"));
 const Totp = lazy(() => import("./pages/Totp"));
+//fine
+
+import "./assets/bootstrap-italia.min.css"
+import "./assets/bootstrap-italia.bundle.min.js"
+
 const MyExtraPage1 = lazy(() => import("./pages/MyExtraPage1"));
 const MyExtraPage2 = lazy(() => import("./pages/MyExtraPage2"));
 const Fallback = lazy(()=> import("keycloakify/account"));
@@ -31,13 +37,16 @@ export default function KcApp(props: { kcContext: KcContext; }) {
     return (
         <Suspense>
             {(() => {
-                console.log(kcContext.pageId)
                 switch (kcContext.pageId) {
+
+                    //CASE aggiunti
                     case "password.ftl": return <Password {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={false} />;
                     case "account.ftl": return <Account {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={false} />;
                     case "applications.ftl": return <Applications {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={false} />;
                     case "sessions.ftl": return <Sessions {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={false} />;
                     case "totp.ftl": return <Totp {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={false} />;
+                    //fine
+
                     case "my-extra-page-1.ftl": return <MyExtraPage1 {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     case "my-extra-page-2.ftl": return <MyExtraPage2 {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     default: return <Fallback {...{ kcContext, i18n, classes }} Template={Template} doUseDefaultCss={true} />;

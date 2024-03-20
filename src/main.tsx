@@ -3,9 +3,6 @@ import { StrictMode, lazy, Suspense } from "react";
 import { kcContext as kcLoginThemeContext } from "./keycloak-theme/login/kcContext";
 import { kcContext as kcAccountThemeContext } from "./keycloak-theme/account/kcContext";
 
-import "./bootstrap-italia.bundle.min.js"
-import "./bootstrap-italia.min.css"
-
 const KcLoginThemeApp = lazy(() => import("./keycloak-theme/login/KcApp"));
 const KcAccountThemeApp = lazy(() => import("./keycloak-theme/account/KcApp"));
 // Important note:

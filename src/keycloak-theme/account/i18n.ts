@@ -6,6 +6,10 @@ export const { useI18n } = createUseI18n({
         tagLineIstituzione: "Tag line dell'Istituzione",
         enteDiAppartenenza: "Ente di Appartenenza"
     }
+    // it, en, ecc: {
+    //     labelKey: "actualLabel"
+    // }
 });
+
 
 export type I18n = NonNullable<ReturnType<typeof useI18n>>;
