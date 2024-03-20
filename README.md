@@ -13,7 +13,7 @@ Questo repository contiene tutte le risorse e le istruzioni necessarie per perso
 
 # Il tema
 keycloakify offre la possibilità di customizzare in profondità ogni pagina di keycloak tramite la libreria di <strong>REACT</strong>.
-Per aderirire alle linee guida della publica amministrazione e` stato scelto <strong>Bootstrap-italia</strong> che permette un rapido sviluppo del frontend mantenedo lo stile che caratterizza i le pagine web dei servizi pubblici...
+Per aderirire alle linee guida della pubblica amministrazione e` stato scelto <strong>Bootstrap-italia</strong> che permette un rapido sviluppo del frontend mantenedo lo stile che caratterizza i le pagine web dei servizi pubblici...
 
 
 # I File Aggiunti
