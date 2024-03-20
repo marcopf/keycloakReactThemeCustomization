@@ -1,11 +1,3 @@
-<style>
-  .subTitle{
-    color: red;
-  }
-  .path{
-    font-weight: bolder;
-  }
-</style>
 
 
 # introduzione
@@ -67,8 +59,7 @@ sara` poi possibile urilizzarli nel progetto tramite <strong>import</strong>
 
 # Compilazione e Startup
 È possibile compilare il progetto tramite il comando
-<strong>yarn install</strong> (solo la prima volta)
-<strong>yarn build-keycloak-theme</strong>
+<strong>yarn install</strong> && <strong>yarn build-keycloak-theme</strong>
 verra' generata la cartella dist_keycloak nella quale e' presente uno script atto a testare il tema sviluppato facendo partire un container con dentro keycloak e il nostro tema.
 Sara' presente inoltre la cartella /dist_keycloak/target dove troveremo il .jar che contiene il nostro tema potendolo cosi importare nella cartella providers di keycloak
 
