@@ -37,7 +37,7 @@ export default function Totp(props: PageProps<Extract<KcContext, { pageId: "totp
                     )}
                 </div>
                 {totp.enabled && (
-                    <table className="table table-bordered table-striped">
+                    <table className="table table-bordered table-striped table-dark">
                         <thead>
                             {totp.otpCredentials.length > 1 ? (
                                 <tr>
@@ -58,7 +58,7 @@ export default function Totp(props: PageProps<Extract<KcContext, { pageId: "totp
                                     <td className="action">
                                         <form action={url.totpUrl} method="post" className="form-inline">
                                             <input type="hidden" id="stateChecker" name="stateChecker" value={stateChecker} />
-                                            <input type="hidden" id="submitAction" name="submitAction" value="Delete" />
+                                            <input className="btn btn-danger" type="submit" id="submitAction" name="submitAction" value="Delete" />
                                             <input type="hidden" id="credentialId" name="credentialId" value={credential.id} />
                                             <button id={`remove-mobile-${index}`} className="btn btn-default">
                                                 <i className="pficon pficon-delete"></i>
@@ -200,17 +200,7 @@ export default function Totp(props: PageProps<Extract<KcContext, { pageId: "totp
                             </div>
 
                             <div id="kc-form-buttons" className={clsx(getClassName("kcFormGroupClass"), "text-right")}>
-                                <div className={getClassName("kcInputWrapperClass")}>
-                                    <input
-                                        type="submit"
-                                        className={clsx(
-                                            getClassName("kcButtonClass"),
-                                            getClassName("kcButtonPrimaryClass"),
-                                            getClassName("kcButtonLargeClass")
-                                        )}
-                                        id="saveTOTPBtn"
-                                        value={msgStr("doSave")}
-                                    />
+                                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-end">
                                     <button
                                         type="submit"
                                         className={clsx(
@@ -218,13 +208,23 @@ export default function Totp(props: PageProps<Extract<KcContext, { pageId: "totp
                                             getClassName("kcButtonDefaultClass"),
                                             getClassName("kcButtonLargeClass"),
                                             getClassName("kcButtonLargeClass")
-                                        )}
+                                            )}
                                         id="cancelTOTPBtn"
                                         name="submitAction"
                                         value="Cancel"
                                     >
                                         {msg("doCancel")}
                                     </button>
+                                    <input
+                                        type="submit"
+                                        className={clsx(
+                                            getClassName("kcButtonClass"),
+                                            getClassName("kcButtonPrimaryClass"),
+                                            getClassName("kcButtonLargeClass"), "otp-btn"
+                                        )}
+                                        id="saveTOTPBtn"
+                                        value={msgStr("doSave").toUpperCase()}
+                                    />
                                 </div>
                             </div>
                         </form>
