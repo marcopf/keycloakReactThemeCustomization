@@ -20,15 +20,18 @@ Come precedentemente accennato la base e` quella messa a disposizione da keycloa
   <li>
     <strong class="subTitle">Sessions.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account/pages</span>
   </li>
-  <!-- <li>
-    <strong class="subTitle">Totp.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account/pages</span>
-  </li> -->
   <li>
     <strong class="subTitle">Applications.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account/pages</span>
   </li>
+  <li>
+    <strong class="subTitle">Header.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account</span>
+  </li>
+  <li>
+    <strong class="subTitle">Footer.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account</span>
+  </li>
 </ul>
 
-Che sono principalmente responsabili di visualizzare i relativi form per la modifica dei dati personali, per la modifica della password, visualizzare le sessioni e visualizzare i client e relativi ruoli / permessi
+Che sono principalmente responsabili di visualizzare i relativi form per la modifica dei dati personali, per la modifica della password, visualizzare le sessioni e visualizzare i client e relativi ruoli / permessi, i file Header.tsx e Footer.tsx invece servono lo scopo di organizzare meglio il codice rendendolo piu "modulare".
 
 # I File Modificati
 
