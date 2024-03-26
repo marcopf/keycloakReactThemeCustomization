@@ -4,7 +4,11 @@ import { createUseI18n } from "keycloakify/account";
 export const { useI18n } = createUseI18n({
     en:{
         tagLineIstituzione: "Tag line dell'Istituzione",
-        enteDiAppartenenza: "Ente di Appartenenza"
+        enteDiAppartenenza: "Ente di Appartenenza",
+        additionalAttributes: "Additional Attributes",
+        accountSecurity: "Account security",
+        signIn: "Sign In",
+        deviceActivity: "Device Activity",
     }
     // it, en, ecc: {
     //     labelKey: "actualLabel"

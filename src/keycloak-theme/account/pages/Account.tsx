@@ -3,6 +3,7 @@ import type { PageProps } from "keycloakify/account/pages/PageProps";
 import { useGetClassName } from "keycloakify/account/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
+import BuildForm from "./DynamicAttribute";
 
 export default function Account(props: PageProps<Extract<KcContext, { pageId: "account.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -31,38 +32,51 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
                     </span>
                 </div>
             </div>
-
             <form action={url.accountUrl} className="form-horizontal mt-3" method="post">
-                <input type="hidden" id="stateChecker" name="stateChecker" value={stateChecker} />
+                <nav>
+                <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a className="nav-item nav-link active" id="nav-tab1-tab" data-bs-toggle="tab" href="#nav-tab1" role="tab" aria-controls="nav-tab1" aria-selected="true">{msg("editAccountHtmlTitle")}</a>
+                    <a className="nav-item nav-link" id="nav-tab2-tab" data-bs-toggle="tab" href="#nav-tab2" role="tab" aria-controls="nav-tab2" aria-selected="false">{msg("additionalAttributes")}</a>
+                  </div>
+                </nav>
+                <div className="tab-content pt-5" id="nav-tabContent">
+                  <div className="tab-pane p-0 fade show active" id="nav-tab1" role="tabpanel" aria-labelledby="nav-tab1-tab">
 
-                {!realm.registrationEmailAsUsername && (
-                    <div className={clsx("form-group", messagesPerField.printIfExists("username", "has-error"))}>
-                        <div className="form-group">
-                            <label className="active control-label" htmlFor="username">{msg("username")}</label>
-                            {realm.editUsernameAllowed && <span className="required">*</span>}
-                            <input
-                                    type="text"
-                                    className="form-control"
-                                    id="username"
-                                    name="username"
-                                    disabled={!realm.editUsernameAllowed}
-                                    defaultValue={account.username ?? ""}
-                            />
+                    <input type="hidden" id="stateChecker" name="stateChecker" value={stateChecker} />
+
+                    {!realm.registrationEmailAsUsername && (
+                        <div className={clsx("form-group", messagesPerField.printIfExists("username", "has-error"))}>
+                            <div className="form-group">
+                                <label className="active control-label" htmlFor="username">{msg("username")}</label>
+                                {realm.editUsernameAllowed && <span className="required">*</span>}
+                                <input
+                                        type="text"
+                                        className="form-control"
+                                        id="username"
+                                        name="username"
+                                        disabled={!realm.editUsernameAllowed}
+                                        defaultValue={account.username ?? ""}
+                                />
+                            </div>
                         </div>
+                    )}
+                    <div className={clsx("form-group", messagesPerField.printIfExists("email", "has-error"))}>
+                        <label className="active control-label" htmlFor="email">{msg("email")}</label>
+                        <input type="text" className="form-control" id="email" name="email" autoFocus defaultValue={account.email ?? ""} />
                     </div>
-                )}
+                    <div className={clsx("form-group", messagesPerField.printIfExists("lastName", "has-error"))}>
+                        <label className="active control-label" htmlFor="firstName">{msg("firstName")}</label>
+                        <input type="text" className="form-control" id="firstName" name="firstName" defaultValue={account.firstName ?? ""} />
+                    </div>
+                    <div className={clsx("form-group", messagesPerField.printIfExists("lastName", "has-error"))}>
+                        <label className="active control-label" htmlFor="lastName">{msg("lastName")}</label>
+                        <input type="text" className="form-control" id="lastName" name="lastName" defaultValue={account.lastName ?? ""} />
+                    </div>
 
-                <div className={clsx("form-group", messagesPerField.printIfExists("lastName", "has-error"))}>
-                    <label className="active control-label" htmlFor="email">{msg("email")}</label>
-                    <input type="text" className="form-control" id="email" name="email" autoFocus defaultValue={account.email ?? ""} />
-                </div>
-                <div className={clsx("form-group", messagesPerField.printIfExists("lastName", "has-error"))}>
-                    <label className="active control-label" htmlFor="firstName">{msg("firstName")}</label>
-                    <input type="text" className="form-control" id="firstName" name="firstName" defaultValue={account.firstName ?? ""} />
-                </div>
-                <div className={clsx("form-group", messagesPerField.printIfExists("lastName", "has-error"))}>
-                    <label className="active control-label" htmlFor="lastName">{msg("lastName")}</label>
-                    <input type="text" className="form-control" id="lastName" name="lastName" defaultValue={account.lastName ?? ""} />
+                  </div>
+                  <div className="tab-pane p-0 fade" id="nav-tab2" role="tabpanel" aria-labelledby="nav-tab2-tab">
+                    <BuildForm></BuildForm>
+                  </div>
                 </div>
 
                 <div className="form-group d-flex justify-content-end">

@@ -5,6 +5,7 @@ import { kcContext as kcAccountThemeContext } from "./keycloak-theme/account/kcC
 
 const KcLoginThemeApp = lazy(() => import("./keycloak-theme/login/KcApp"));
 const KcAccountThemeApp = lazy(() => import("./keycloak-theme/account/KcApp"));
+
 // Important note:
 // In this starter example we show how you can have your react app and your Keycloak theme in the same repo.  
 // Most Keycloakify user only want to great a Keycloak theme.  
