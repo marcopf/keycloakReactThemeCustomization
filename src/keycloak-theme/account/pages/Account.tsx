@@ -35,7 +35,7 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
             <form action={url.accountUrl} className="form-horizontal mt-3" method="post">
                 <nav>
                 <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a className="nav-item nav-link active" id="nav-tab1-tab" data-bs-toggle="tab" href="#nav-tab1" role="tab" aria-controls="nav-tab1" aria-selected="true">{msg("editAccountHtmlTitle")}</a>
+                    <a className="nav-item nav-link active" id="nav-tab1-tab" data-bs-toggle="tab" href="#nav-tab1" role="tab" aria-controls="nav-tab1" aria-selected="true">{msg("defaultAttributes")}</a>
                     <a className="nav-item nav-link" id="nav-tab2-tab" data-bs-toggle="tab" href="#nav-tab2" role="tab" aria-controls="nav-tab2" aria-selected="false">{msg("additionalAttributes")}</a>
                   </div>
                 </nav>
@@ -62,7 +62,7 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
                     )}
                     <div className={clsx("form-group", messagesPerField.printIfExists("email", "has-error"))}>
                         <label className="active control-label" htmlFor="email">{msg("email")}</label>
-                        <input type="text" className="form-control" id="email" name="email" autoFocus defaultValue={account.email ?? ""} />
+                        <input type="text" className="form-control" id="email" name="email" defaultValue={account.email ?? ""} />
                     </div>
                     <div className={clsx("form-group", messagesPerField.printIfExists("lastName", "has-error"))}>
                         <label className="active control-label" htmlFor="firstName">{msg("firstName")}</label>

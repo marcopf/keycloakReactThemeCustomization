@@ -24,6 +24,9 @@ Come precedentemente accennato la base e` quella messa a disposizione da keycloa
     <strong class="subTitle">Applications.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account/pages</span>
   </li>
   <li>
+    <strong class="subTitle">DynamicAttribute.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account/pages</span>
+  </li>
+  <li>
     <strong class="subTitle">Header.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account</span>
   </li>
   <li>
@@ -31,7 +34,30 @@ Come precedentemente accennato la base e` quella messa a disposizione da keycloa
   </li>
 </ul>
 
-Che sono principalmente responsabili di visualizzare i relativi form per la modifica dei dati personali, per la modifica della password, visualizzare le sessioni e visualizzare i client e relativi ruoli / permessi, i file Header.tsx e Footer.tsx invece servono lo scopo di organizzare meglio il codice rendendolo piu "modulare".
+Che sono principalmente responsabili di visualizzare i relativi form per la modifica dei dati personali di default e <strong>custom</strong>, per la modifica della password, visualizzare le sessioni e visualizzare i client e relativi ruoli / permessi, i file Header.tsx e Footer.tsx invece servono lo scopo di organizzare meglio il codice rendendolo piu "modulare".
+
+# Attributi Dinamici
+
+In keycloak 23 non era possibile (di default) aggiungere attributi dinamici per il form di registrazione utente. Essendo il tema messo a disposizione da <strong>keycloakify</strong> abbastanza vecchio, per implementare questa funzionalita' e' stata integrata la creazione dinamica del form mediante i dati ricevuti dal server kyecloak stesso di seguito una descrizione dei passaggi effettuati:
+<ul>
+  <li>
+    <strong>Richiesta Access_Token</strong><br>
+      viene dapprima effettuata una richiesta al server di keycloak per ottenere un'access token che verra' utilizzato in seguito per ottenere i dati necessari.
+      la richiesta e' di tipo <strong>OAUTH2</strong> con <strong>PKCE</strong>.
+  </li>
+  <br>
+  <li>
+    <strong>Richiesta dati relativi agli attributi</strong><br>
+      Tramite <strong>FETCH</strong> viene effettuata una chiamata al server di keycloak per ottenere le informazioni relative agli attributi come ad esempio nome, displayName e validators collegati.<br>
+      In questa richiesta viene aggiunto il token precedentemente ottenuto nell'header nel campo Authorization: Bearer >token<.
+  </li>
+  <br>
+  <li>
+    <strong>Creazione degli attributi Dinamici</strong><br>
+      Arrivati a questo punto abbiamo tutto, basta ciclare l'array con le informazioni ottenuto da keycloak e generare il relativo codice html basandoci su quest'ultimo, per fare cio' e' stata usata la funzione map escludendo gli attributi di default che rimangono invece "Hard Coded" (si puo' tranquillamente modificare questo comportamento).
+  </li>
+</ul>
+Il file in cui viene svolto il tutto e' <strong class="subTitle">DynamicAttribute.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account/pages</span>
 
 # I File Modificati
 

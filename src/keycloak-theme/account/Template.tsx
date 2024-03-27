@@ -13,7 +13,6 @@ import sprites from './assets/sprites.svg'
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, classes, children } = props;
-    console.log(children)
 
     const { getClassName } = useGetClassName({ doUseDefaultCss, classes });
 
@@ -32,87 +31,67 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     if (!isReady) {
         return null;
     }
-    console.log(window.location.href, url.accountUrl)
-
-  
     return (
       <>
         <Header props={props}></Header>
-        <div className="bd-example-tabs container-fluid">
+        <div className="bd-example-tabs container-fluid" style={{minHeight: "90svh"}}>
           <div className="row">
-            {/* <div className="col-4 col-md-3">
-              <div className="nav nav-tabs nav-tabs-vertical nav-tabs-vertical-background" id="nav-vertical-tab-bg" role="tablist" aria-orientation="vertical">
-                {
-                  kcContext.pageId == "account.ftl" ? <a className="nav-link active" href={url.accountUrl}>{msg("account")}</a> : <a className="nav-link" href={url.accountUrl}>{msg("account")}</a>
-                }
-                {features.identityFederation && (
-                      <a className="nav-link" href={url.socialUrl}>{msg("federatedIdentity")}</a>
-                )}
-                {
-                  kcContext.pageId == "sessions.ftl" ? <a className="nav-link active" aria-selected="true" href={url.sessionsUrl}>{msg("sessions")}</a> : <a className="nav-link" aria-selected="false" href={url.sessionsUrl}>{msg("sessions")}</a>
-                }
-                {
-                  kcContext.pageId == "applications.ftl" ? <a className="nav-link active" aria-selected="true" href={url.applicationsUrl}>{msg("applications")}</a> : <a className="nav-link" aria-selected="true" href={url.applicationsUrl}>{msg("applications")}</a>
-                }
-                {features.log && (
-                  kcContext.pageId == "log.ftl" ? <a className="nav-link active" href={url.logUrl}>{msg("log")}</a> : <a className="nav-link" href={url.logUrl}>{msg("log")}</a>
-                )}
-                <p>
-                  <button className="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    
-                  </button>
-                </p>
-                <div className="collapse" id="collapseExample">
-                  <div className="card card-body">
-                    {features.passwordUpdateSupported && (
-                      kcContext.pageId == "password.ftl" ? <a className="nav-link active" href={url.passwordUrl}>{msg("password")}</a> : <a className="nav-link" href={url.passwordUrl}>{msg("password")}</a>
-                    )}
-                    {
-                      kcContext.pageId == "totp.ftl" ? <a className="nav-link active" href={url.totpUrl}>Totp</a> : <a className="nav-link" href={url.totpUrl}>Totp</a>
-                    }
+            <div className="col-4 col-md-3">
+              <div className="sidebar-wrapper">
+                <h3>Account Console</h3>
+                <div className="sidebar-linklist-wrapper">
+                  <div className="link-list-wrapper">
+                    <ul className="link-list">
+                      <li>
+                        { kcContext.pageId == "account.ftl" ? 
+                          <a className="list-item large medium right-icon active" href={url.accountUrl}><span>{msg("account")}</span></a>
+                        :
+                          <a className="list-item large medium right-icon" href={url.accountUrl}><span>{msg("account")}</span></a>
+                        }
+                      </li>
+                      <li>
+                        <a className={"list-item large medium right-icon " + (kcContext.pageId == "sessions.ftl" || kcContext.pageId == "password.ftl" || kcContext.pageId == "totp.ftl" ? 'active' : '')} href="#collapseOne" role="button" data-bs-toggle="collapse" aria-expanded={kcContext.pageId == "sessions.ftl" || kcContext.pageId == "password.ftl" ? 'true' : 'false'} aria-controls="collapseOne">
+                        <span className="list-item-title-icon-wrapper">
+                          <span>{msg("accountSecurity")}</span>
+                          <svg className="icon icon-sm icon-primary right" aria-hidden="true"><use href={sprites + '#it-expand'}></use></svg>
+                        </span>
+                        </a>
+                        <ul className={"link-sublist collapse " + (kcContext.pageId == "sessions.ftl" || kcContext.pageId == "password.ftl" || kcContext.pageId == "totp.ftl" ? 'show' : '')} id="collapseOne">
+                          <li>
+                            { kcContext.pageId == "password.ftl" ? 
+                              <a className="list-item large medium right-icon active" href={url.passwordUrl}><span>{msg("password")}</span></a>
+                            :
+                              <a className="list-item large medium right-icon" href={url.passwordUrl}><span>{msg("password")}</span></a>
+                            }
+                          </li>
+                          <li>
+                            { kcContext.pageId == "totp.ftl" ? 
+                              <a className="list-item large medium right-icon active" href={url.totpUrl}><span>Totp</span></a>
+                            :
+                              <a className="list-item large medium right-icon" href={url.totpUrl}><span>Totp</span></a>
+                            }
+                          </li>
+                          <li>
+                            { kcContext.pageId == "sessions.ftl" ? 
+                              <a className="list-item large medium right-icon active" href={url.sessionsUrl}><span>{msg("sessions")}</span></a>
+                            :
+                              <a className="list-item large medium right-icon" href={url.sessionsUrl}><span>{msg("sessions")}</span></a>
+                            }
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        { kcContext.pageId == "applications.ftl" ? 
+                          <a className="list-item large medium right-icon active" href={url.applicationsUrl}><span>{msg("applications")}</span></a>
+                        :
+                          <a className="list-item large medium right-icon" href={url.applicationsUrl}><span>{msg("applications")}</span></a>
+                        }
+                      </li>
+                    </ul>
                   </div>
-                </div>
-                {realm.userManagedAccessAllowed && features.authorization && (
-                  window.location.href == url.resourceUrl ? <a className="nav-link active" href={url.resourceUrl}>{msg("myResources")}</a> : <a className="nav-link" href={url.resourceUrl}>{msg("myResources")}</a>
-                )}
-              </div>
-            </div> */}
-
-
-<div className="col-4 col-md-3">
-            <div className="sidebar-wrapper">
-              <h3>Header</h3>
-              <div className="sidebar-linklist-wrapper">
-                <div className="link-list-wrapper">
-                  <ul className="link-list">
-                    <li>
-                      <a className="list-item large medium right-icon" href="#collapseOne" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseOne">
-                      <span className="list-item-title-icon-wrapper">
-                        <span>{msg("accountSecurity")}</span>
-                        <svg className="icon icon-sm icon-primary right" aria-hidden="true"><use href={sprites + '#it-expand'}></use></svg>
-                      </span>
-                      </a>
-                      <ul className="link-sublist collapse" id="collapseOne">
-                        <li><a className="list-item active" href={url.passwordUrl}><span>{msg("password")}</span></a>
-                        </li>
-                        <li><a className="list-item" href={url.sessionsUrl}><span>{msg("sessions")}</span></a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a className="list-item large medium" href={url.accountUrl}><span>Link lista 2.2</span></a>
-                    </li>
-                    <li>
-                      <a className="list-item large medium" href={url.accountUrl}><span>{msg("account")}</span></a>
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>
-
-</div>
-
-
             <div className="col-8 col-md-9">
               <div className="tab-content px-5 pb-5" id="nav-vertical-tab-bgContent">
                 <div className="tab-pane p-3 fade show active" id="nav-vertical-tab-bg1" role="tabpanel" aria-labelledby="nav-vertical-tab-bg1-tab">
@@ -131,8 +110,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                       </div>
                   </div>
                 </div>
-                <div className="tab-pane p-3 fade" id="nav-vertical-tab-bg2" role="tabpanel" aria-labelledby="nav-vertical-tab-bg2-tab">Contenuto 2</div>
-                <div className="tab-pane p-3 fade" id="nav-vertical-tab-bg3" role="tabpanel" aria-labelledby="nav-vertical-tab-bg3-tab">Contenuto 3</div>
               </div>
             </div>
           </div>

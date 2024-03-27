@@ -33,7 +33,7 @@ export default function LogoutConfirm(props: PageProps<Extract<KcContext, { page
                 {password.passwordSet && (
                     <div className="form-group">
                         <label className="active control-label" htmlFor="password">{msg("password")}</label>
-                        <input type="password" className="form-control" id="password" name="password" autoFocus autoComplete="current-password" />
+                        <input type="password" className="form-control" id="password" name="password" autoComplete="current-password" />
                     </div>
                 )}
                 <input type="hidden" id="stateChecker" name="stateChecker" value={stateChecker} />

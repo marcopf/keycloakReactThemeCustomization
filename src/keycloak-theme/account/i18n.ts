@@ -3,9 +3,10 @@ import { createUseI18n } from "keycloakify/account";
 //NOTE: See src/login/i18n.ts for instructions on customization of i18n messages.
 export const { useI18n } = createUseI18n({
     en:{
+        defaultAttributes: "Informazioni Base",
         tagLineIstituzione: "Tag line dell'Istituzione",
         enteDiAppartenenza: "Ente di Appartenenza",
-        additionalAttributes: "Additional Attributes",
+        additionalAttributes: "Informazioni Aggiuntive",
         accountSecurity: "Account security",
         signIn: "Sign In",
         deviceActivity: "Device Activity",

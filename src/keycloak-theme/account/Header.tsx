@@ -6,6 +6,10 @@ export default function Header(props: any){
 
     const { msg } = i18n;
     const { referrer, url } = props.props.kcContext;
+    function handleClick(){
+      localStorage.clear();
+      window.location.href = url.getLogoutUrl();
+    }
     return (<>
       <header className="it-header-wrapper">
         <div className="it-header-slim-wrapper">
@@ -29,7 +33,7 @@ export default function Header(props: any){
                   </div>
                   <div className="it-header-slim-right-zone">
                     <div className="it-access-top-wrapper">
-                      <a className="btn btn-primary btn-sm" href={url.getLogoutUrl()}>Logout</a>
+                      <button className='btn btn-primary btn-sm' onClick={handleClick}>Logout</button>
                     </div>
                   </div>
                 </div>
