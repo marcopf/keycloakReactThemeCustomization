@@ -35,102 +35,105 @@ export default function Applications(props: PageProps<Extract<KcContext, { pageI
                     <input type="hidden" id="stateChecker" name="stateChecker" value={stateChecker} />
                     <input type="hidden" id="referrer" name="referrer" value={stateChecker} />
 
-                    <table className="table table-striped table-dark">
-                        <thead>
-                            <tr>
-                                <td scope="col">{msg("application")}</td>
-                                <td scope="col">{msg("availableRoles")}</td>
-                                <td scope="col">{msg("grantedPermissions")}</td>
-                                <td scope="col">{msg("additionalGrants")}</td>
-                                <td scope="col">{msg("action")}</td>
-                            </tr>
-                        </thead>
+                    <div className="rounded-3 p-0 overflow-hidden">
 
-                        <tbody>
-                            {applications.map(application => (
-                                <tr key={application.client.clientId}>
-                                    <td>
-                                        {application.effectiveUrl && (
-                                            <a href={application.effectiveUrl}>
-                                                {(application.client.name && advancedMsg(application.client.name)) || application.client.clientId}
-                                            </a>
-                                        )}
-                                        {!application.effectiveUrl &&
-                                            ((application.client.name && advancedMsg(application.client.name)) || application.client.clientId)}
-                                    </td>
-
-                                    <td>
-                                        {!isArrayWithEmptyObject(application.realmRolesAvailable) &&
-                                            application.realmRolesAvailable.map(role => (
-                                                <span key={role.name}>
-                                                    {role.description ? advancedMsg(role.description) : advancedMsg(role.name)}
-                                                    {role !== application.realmRolesAvailable[application.realmRolesAvailable.length - 1] && ", "}
-                                                </span>
-                                            ))}
-                                        {!isArrayWithEmptyObject(application.realmRolesAvailable) && application.resourceRolesAvailable && ", "}
-                                        {application.resourceRolesAvailable &&
-                                            Object.keys(application.resourceRolesAvailable).map(resource => (
-                                                <span key={resource}>
-                                                    {!isArrayWithEmptyObject(application.realmRolesAvailable) && ", "}
-                                                    {application.resourceRolesAvailable[resource].map(clientRole => (
-                                                        <span key={clientRole.roleName}>
-                                                            {clientRole.roleDescription
-                                                                ? advancedMsg(clientRole.roleDescription)
-                                                                : advancedMsg(clientRole.roleName)}{" "}
-                                                            {msg("inResource")}{" "}
-                                                            <strong>
-                                                                {clientRole.clientName ? advancedMsg(clientRole.clientName) : clientRole.clientId}
-                                                            </strong>
-                                                            {clientRole !==
-                                                                application.resourceRolesAvailable[resource][
-                                                                    application.resourceRolesAvailable[resource].length - 1
-                                                                ] && ", "}
-                                                        </span>
-                                                    ))}
-                                                </span>
-                                            ))}
-                                    </td>
-
-                                    <td>
-                                        {application.client.consentRequired ? (
-                                            application.clientScopesGranted.map(claim => (
-                                                <span key={claim}>
-                                                    {advancedMsg(claim)}
-                                                    {claim !== application.clientScopesGranted[application.clientScopesGranted.length - 1] && ", "}
-                                                </span>
-                                            ))
-                                        ) : (
-                                            <strong>{msg("fullAccess")}</strong>
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        {application.additionalGrants.map(grant => (
-                                            <span key={grant}>
-                                                {advancedMsg(grant)}
-                                                {grant !== application.additionalGrants[application.additionalGrants.length - 1] && ", "}
-                                            </span>
-                                        ))}
-                                    </td>
-
-                                    <td>
-                                        {(application.client.consentRequired && application.clientScopesGranted.length > 0) ||
-                                        application.additionalGrants.length > 0 ? (
-                                            <button
-                                                type="submit"
-                                                className={clsx(getClassName("kcButtonPrimaryClass"), getClassName("kcButtonClass"))}
-                                                id={`revoke-${application.client.clientId}`}
-                                                name="clientId"
-                                                value={application.client.id}
-                                            >
-                                                {msg("revoke")}
-                                            </button>
-                                        ) : null}
-                                    </td>
+                        <table className="table table-striped table-dark m-0">
+                            <thead>
+                                <tr>
+                                    <td scope="col">{msg("application")}</td>
+                                    <td scope="col">{msg("availableRoles")}</td>
+                                    <td scope="col">{msg("grantedPermissions")}</td>
+                                    <td scope="col">{msg("additionalGrants")}</td>
+                                    <td scope="col">{msg("action")}</td>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+        
+                            <tbody>
+                                {applications.map(application => (
+                                    <tr key={application.client.clientId}>
+                                        <td>
+                                            {application.effectiveUrl && (
+                                                <a href={application.effectiveUrl}>
+                                                    {(application.client.name && advancedMsg(application.client.name)) || application.client.clientId}
+                                                </a>
+                                            )}
+                                            {!application.effectiveUrl &&
+                                                ((application.client.name && advancedMsg(application.client.name)) || application.client.clientId)}
+                                        </td>
+                                            
+                                        <td>
+                                            {!isArrayWithEmptyObject(application.realmRolesAvailable) &&
+                                                application.realmRolesAvailable.map(role => (
+                                                    <span key={role.name}>
+                                                        {role.description ? advancedMsg(role.description) : advancedMsg(role.name)}
+                                                        {role !== application.realmRolesAvailable[application.realmRolesAvailable.length - 1] && ", "}
+                                                    </span>
+                                                ))}
+                                            {!isArrayWithEmptyObject(application.realmRolesAvailable) && application.resourceRolesAvailable && ", "}
+                                            {application.resourceRolesAvailable &&
+                                                Object.keys(application.resourceRolesAvailable).map(resource => (
+                                                    <span key={resource}>
+                                                        {!isArrayWithEmptyObject(application.realmRolesAvailable) && ", "}
+                                                        {application.resourceRolesAvailable[resource].map(clientRole => (
+                                                            <span key={clientRole.roleName}>
+                                                                {clientRole.roleDescription
+                                                                    ? advancedMsg(clientRole.roleDescription)
+                                                                    : advancedMsg(clientRole.roleName)}{" "}
+                                                                {msg("inResource")}{" "}
+                                                                <strong>
+                                                                    {clientRole.clientName ? advancedMsg(clientRole.clientName) : clientRole.clientId}
+                                                                </strong>
+                                                                {clientRole !==
+                                                                    application.resourceRolesAvailable[resource][
+                                                                        application.resourceRolesAvailable[resource].length - 1
+                                                                    ] && ", "}
+                                                            </span>
+                                                        ))}
+                                                    </span>
+                                                ))}
+                                        </td>
+                                                                
+                                        <td>
+                                            {application.client.consentRequired ? (
+                                                application.clientScopesGranted.map(claim => (
+                                                    <span key={claim}>
+                                                        {advancedMsg(claim)}
+                                                        {claim !== application.clientScopesGranted[application.clientScopesGranted.length - 1] && ", "}
+                                                    </span>
+                                                ))
+                                            ) : (
+                                                <strong>{msg("fullAccess")}</strong>
+                                            )}
+                                        </td>
+                                            
+                                        <td>
+                                            {application.additionalGrants.map(grant => (
+                                                <span key={grant}>
+                                                    {advancedMsg(grant)}
+                                                    {grant !== application.additionalGrants[application.additionalGrants.length - 1] && ", "}
+                                                </span>
+                                            ))}
+                                        </td>
+                                            
+                                        <td>
+                                            {(application.client.consentRequired && application.clientScopesGranted.length > 0) ||
+                                            application.additionalGrants.length > 0 ? (
+                                                <button
+                                                    type="submit"
+                                                    className={clsx(getClassName("kcButtonPrimaryClass"), getClassName("kcButtonClass"))}
+                                                    id={`revoke-${application.client.clientId}`}
+                                                    name="clientId"
+                                                    value={application.client.id}
+                                                >
+                                                    {msg("revoke")}
+                                                </button>
+                                            ) : null}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </form>
             </div>
         </Template>

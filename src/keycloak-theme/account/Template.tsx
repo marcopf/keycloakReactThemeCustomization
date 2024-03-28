@@ -45,40 +45,75 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     <ul className="link-list">
                       <li>
                         { kcContext.pageId == "account.ftl" ? 
-                          <a className="list-item large medium right-icon active" href={url.accountUrl}><span>{msg("account")}</span></a>
+                          <a className="list-item large medium left-icon active" href={url.accountUrl}>
+                            <span className="list-item-title-icon-wrapper">
+                              <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-user"}></use></svg><span>{msg('account')}</span>
+                            </span>
+                          </a>
                         :
-                          <a className="list-item large medium right-icon" href={url.accountUrl}><span>{msg("account")}</span></a>
+                          <a className="list-item large medium left-icon" href={url.accountUrl}>
+                            <span className="list-item-title-icon-wrapper">
+                              <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-user"}></use></svg><span>{msg('account')}</span>
+                            </span>
+                          </a>
                         }
                       </li>
                       <li>
-                        <a className={"list-item large medium right-icon " + (kcContext.pageId == "sessions.ftl" || kcContext.pageId == "password.ftl" || kcContext.pageId == "totp.ftl" ? 'active' : '')} href="#collapseOne" role="button" data-bs-toggle="collapse" aria-expanded={kcContext.pageId == "sessions.ftl" || kcContext.pageId == "password.ftl" ? 'true' : 'false'} aria-controls="collapseOne">
+                        <a className={"list-item large medium right-icon " + (kcContext.pageId == "sessions.ftl" || kcContext.pageId == "password.ftl" ? 'active' : '')} href="#collapseOne" role="button" data-bs-toggle="collapse" aria-expanded={kcContext.pageId == "sessions.ftl" || kcContext.pageId == "password.ftl" ? 'true' : 'false'} aria-controls="collapseOne">
                         <span className="list-item-title-icon-wrapper">
-                          <span>{msg("accountSecurity")}</span>
+                          <span className="list-item-title-icon-wrapper left-icon">
+                            <svg className="icon icon-sm icon-primary doNotTurn me-2" aria-hidden="true"><use href={sprites + '#it-locked'}></use></svg>
+                            <span>{msg("accountSecurity")}</span>
+                          </span>
                           <svg className="icon icon-sm icon-primary right" aria-hidden="true"><use href={sprites + '#it-expand'}></use></svg>
                         </span>
                         </a>
                         <ul className={"link-sublist collapse " + (kcContext.pageId == "sessions.ftl" || kcContext.pageId == "password.ftl" || kcContext.pageId == "totp.ftl" ? 'show' : '')} id="collapseOne">
                           <li>
                             { kcContext.pageId == "password.ftl" ? 
-                              <a className="list-item large medium right-icon active" href={url.passwordUrl}><span>Sign In</span></a>
+                              <a className="list-item large medium left-icon active" href={url.passwordUrl}>
+                                <span className="list-item-title-icon-wrapper">
+                                  <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-key"}></use></svg><span>Sign In</span>
+                                </span>
+                              </a>
                             :
-                              <a className="list-item large medium right-icon" href={url.passwordUrl}><span>Sign In</span></a>
+                              <a className="list-item large medium left-icon" href={url.passwordUrl}>
+                                <span className="list-item-title-icon-wrapper">
+                                  <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-key"}></use></svg><span>Sign In</span>
+                                </span>
+                              </a>
                             }
                           </li>
                           <li>
                             { kcContext.pageId == "sessions.ftl" ? 
-                              <a className="list-item large medium right-icon active" href={url.sessionsUrl}><span>{msg("sessions")}</span></a>
+                              <a className="list-item large medium left-icon active" href={url.sessionsUrl}>
+                                <span className="list-item-title-icon-wrapper">
+                                  <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-warning-circle"}></use></svg><span>{msg('sessions')}</span>
+                                </span>
+                              </a>
                             :
-                              <a className="list-item large medium right-icon" href={url.sessionsUrl}><span>{msg("sessions")}</span></a>
+                              <a className="list-item large medium left-icon" href={url.sessionsUrl}>
+                                <span className="list-item-title-icon-wrapper">
+                                  <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-warning-circle"}></use></svg><span>{msg('sessions')}</span>
+                                </span>
+                              </a>
                             }
                           </li>
                         </ul>
                       </li>
                       <li>
                         { kcContext.pageId == "applications.ftl" ? 
-                          <a className="list-item large medium right-icon active" href={url.applicationsUrl}><span>{msg("applications")}</span></a>
+                          <a className="list-item large medium left-icon active" href={url.applicationsUrl}>
+                            <span className="list-item-title-icon-wrapper">
+                              <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-piattaforme"}></use></svg><span>{msg('applications')}</span>
+                            </span>
+                          </a>
                         :
-                          <a className="list-item large medium right-icon" href={url.applicationsUrl}><span>{msg("applications")}</span></a>
+                          <a className="list-item large medium left-icon" href={url.applicationsUrl}>
+                            <span className="list-item-title-icon-wrapper">
+                              <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-piattaforme"}></use></svg><span>{msg('applications')}</span>
+                            </span>
+                          </a>
                         }
                       </li>
                     </ul>

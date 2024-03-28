@@ -24,6 +24,10 @@ This is why I made sure to use .my-root-account-class instead of .my-root-class 
 	color: white !important;
 }
 
+.doNotTurn{
+	transform: none !important;
+}
+
 @font-face {
 	font-family: Titillium;
 	src: url("./assets/fonts/Titillium_Web/titillium-web-v10-latin-ext_latin-700italic.woff2") format("woff2");
