@@ -27,7 +27,7 @@ export default function Applications(props: PageProps<Extract<KcContext, { pageI
     return (
         <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} active="applications">
             <div className="row">
-                <div className="col-md-10">
+                <div className="col-md-10 mb-3">
                     <h2>{msg("applicationsHtmlTitle")}</h2>
                 </div>
 
@@ -47,7 +47,7 @@ export default function Applications(props: PageProps<Extract<KcContext, { pageI
                                     <td scope="col">{msg("action")}</td>
                                 </tr>
                             </thead>
-        
+
                             <tbody>
                                 {applications.map(application => (
                                     <tr key={application.client.clientId}>
@@ -60,7 +60,7 @@ export default function Applications(props: PageProps<Extract<KcContext, { pageI
                                             {!application.effectiveUrl &&
                                                 ((application.client.name && advancedMsg(application.client.name)) || application.client.clientId)}
                                         </td>
-                                            
+
                                         <td>
                                             {!isArrayWithEmptyObject(application.realmRolesAvailable) &&
                                                 application.realmRolesAvailable.map(role => (
@@ -92,7 +92,7 @@ export default function Applications(props: PageProps<Extract<KcContext, { pageI
                                                     </span>
                                                 ))}
                                         </td>
-                                                                
+
                                         <td>
                                             {application.client.consentRequired ? (
                                                 application.clientScopesGranted.map(claim => (
@@ -105,7 +105,7 @@ export default function Applications(props: PageProps<Extract<KcContext, { pageI
                                                 <strong>{msg("fullAccess")}</strong>
                                             )}
                                         </td>
-                                            
+
                                         <td>
                                             {application.additionalGrants.map(grant => (
                                                 <span key={grant}>
@@ -114,7 +114,7 @@ export default function Applications(props: PageProps<Extract<KcContext, { pageI
                                                 </span>
                                             ))}
                                         </td>
-                                            
+
                                         <td>
                                             {(application.client.consentRequired && application.clientScopesGranted.length > 0) ||
                                             application.additionalGrants.length > 0 ? (
