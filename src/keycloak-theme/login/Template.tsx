@@ -56,64 +56,63 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     return (
         <div className={getClassName("kcLoginClass")}>
-<div className="it-header-center-wrapper it-small-header">
-  <div className="container">
-    <div className="row">
-      <div className="col-12">
-        <div className="it-header-center-content-wrapper">
-          <div className="it-brand-wrapper">
-            <a href="#">
-              <svg className="icon" aria-hidden="true">
-                <use href="/bootstrap-italia/dist/svg/sprites.svg#it-pa"></use>
-              </svg>
-              <div className="it-brand-text">
-                <div className="it-brand-title">Nome dell'Istituzione</div>
-                <div className="it-brand-tagline d-none d-md-block">Tag line dell'Istituzione</div>
+            <div className="it-header-center-wrapper it-small-header">
+              <div className="container">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="it-header-center-content-wrapper">
+                      <div className="it-brand-wrapper">
+                        <a href="#">
+                          <svg className="icon" aria-hidden="true">
+                            <use href="/bootstrap-italia/dist/svg/sprites.svg#it-pa"></use>
+                          </svg>
+                          <div className="it-brand-text">
+                            <div className="it-brand-title">Nome dell'Istituzione</div>
+                            <div className="it-brand-tagline d-none d-md-block">Tag line dell'Istituzione</div>
+                          </div>
+                        </a>
+                      </div>
+                      <div className="it-right-zone">
+                        <div className="it-socials d-none d-md-flex">
+                          <span>Seguici su</span>
+                          <ul>
+                            <li>
+                              <a href="#" aria-label="Facebook" target="_blank">
+                                <svg className="icon">
+                                  <use href="/bootstrap-italia/dist/svg/sprites.svg#it-facebook"></use>
+                                </svg>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#" aria-label="Github" target="_blank">
+                                <svg className="icon">
+                                  <use href="/bootstrap-italia/dist/svg/sprites.svg#it-github"></use>
+                                </svg>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#" aria-label="Twitter" target="_blank">
+                                <svg className="icon">
+                                  <use href="/bootstrap-italia/dist/svg/sprites.svg#it-twitter"></use>
+                                </svg>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <div className="it-search-wrapper">
+                          <span className="d-none d-md-block">Cerca</span>
+                          <a className="search-link rounded-icon" aria-label="Cerca nel sito" href="#">
+                            <svg className="icon">
+                              <use href="/bootstrap-italia/dist/svg/sprites.svg#it-search"></use>
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </a>
-          </div>
-          <div className="it-right-zone">
-            <div className="it-socials d-none d-md-flex">
-              <span>Seguici su</span>
-              <ul>
-                <li>
-                  <a href="#" aria-label="Facebook" target="_blank">
-                    <svg className="icon">
-                      <use href="/bootstrap-italia/dist/svg/sprites.svg#it-facebook"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" aria-label="Github" target="_blank">
-                    <svg className="icon">
-                      <use href="/bootstrap-italia/dist/svg/sprites.svg#it-github"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" aria-label="Twitter" target="_blank">
-                    <svg className="icon">
-                      <use href="/bootstrap-italia/dist/svg/sprites.svg#it-twitter"></use>
-                    </svg>
-                  </a>
-                </li>
-              </ul>
             </div>
-            <div className="it-search-wrapper">
-              <span className="d-none d-md-block">Cerca</span>
-              <a className="search-link rounded-icon" aria-label="Cerca nel sito" href="#">
-                <svg className="icon">
-                  <use href="/bootstrap-italia/dist/svg/sprites.svg#it-search"></use>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
             <div className={clsx(getClassName("kcFormCardClass"), displayWide && getClassName("kcFormCardAccountClass"))}>
                 <header className={getClassName("kcFormHeaderClass")}>
                     {realm.internationalizationEnabled && (assert(locale !== undefined), true) && locale.supported.length > 1 && (

@@ -1,17 +1,20 @@
 import type { PageProps } from "keycloakify/account/pages/PageProps";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
+import OtpSection from './OtpSection'
 
-export default function LogoutConfirm(props: PageProps<Extract<KcContext, { pageId: "password.ftl" }>, I18n>) {
+export default function LogoutConfirm(fprops: any) {
+    let props = fprops as PageProps<Extract<KcContext, { pageId: "password.ftl" }>, I18n>
+    console.log(fprops, props)
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
 
     const { url, password, account, stateChecker } = kcContext;
 
     const { msg } = i18n;
-
+    
     return (
-        <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} active="password">
+        <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} active="password">            
             <div className="row d-flex align-items-center">
                 <div className="col-md-8">
                     <h2>{msg("changePasswordHtmlTitle")}</h2>
@@ -60,6 +63,7 @@ export default function LogoutConfirm(props: PageProps<Extract<KcContext, { page
                     </div>
                 </div>
             </form>
+            <OtpSection></OtpSection>
         </Template>
     );
 }

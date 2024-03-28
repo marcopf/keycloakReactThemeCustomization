@@ -10,7 +10,6 @@ const Password = lazy(() => import("./pages/Password"));
 const Account = lazy(() => import("./pages/Account"));
 const Applications = lazy(() => import("./pages/Applications"));
 const Sessions = lazy(() => import("./pages/Sessions"));
-const Totp = lazy(() => import("./pages/Totp"));
 //fine
 
 import "./assets/bootstrap-italia.min.css"
@@ -44,7 +43,6 @@ export default function KcApp(props: { kcContext: KcContext; }) {
                     case "account.ftl": return <Account {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={false} />;
                     case "applications.ftl": return <Applications {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={false} />;
                     case "sessions.ftl": return <Sessions {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={false} />;
-                    case "totp.ftl": return <Totp {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={false} />;
                     //fine
 
                     case "my-extra-page-1.ftl": return <MyExtraPage1 {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;

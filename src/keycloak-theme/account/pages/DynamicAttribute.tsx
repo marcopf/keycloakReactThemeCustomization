@@ -9,7 +9,7 @@ const CLIENT_ID =       'account-console'
 const AUTH_ENDPOINT =   'http://localhost:8080/realms/master/protocol/openid-connect/auth';
 const TOKEN_ENDPOINT =  'http://localhost:8080/realms/master/protocol/openid-connect/token';
 const REDIRECT_URI =    'http://localhost:8080/realms/master/account/';
-const SCOPE =           'profile openid'
+const SCOPE =           'openid'
 const INFO_ENDPOINT =   'http://localhost:8080/realms/master/account/?userProfileMetadata=true'
 
 //----
@@ -40,7 +40,6 @@ async function getInfo(token: string) {
     //parso la risposta come json
     let resJson = {};
     try {
-        console.log(res)
         if (res.ok)
             resJson = await res.json();
     } catch (e) {

@@ -27,6 +27,9 @@ Come precedentemente accennato la base e` quella messa a disposizione da keycloa
     <strong class="subTitle">DynamicAttribute.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account/pages</span>
   </li>
   <li>
+    <strong class="subTitle">OtpSection.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account/pages</span>
+  </li>
+  <li>
     <strong class="subTitle">Header.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account</span>
   </li>
   <li>
@@ -58,6 +61,11 @@ In keycloak 23 non era possibile (di default) aggiungere attributi dinamici per 
   </li>
 </ul>
 Il file in cui viene svolto il tutto e' <strong class="subTitle">DynamicAttribute.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account/pages</span>
+
+# Otp Configuration
+Nel tema di base messo a disposizione da keycloakIfy la sezione otp carica un "card" a destra della sidebar principale,per emulare meglio quello che e' il piu' recente tema di keycloak la parte <strong>OTP</strong> e' stata implementata insieme al form di cambio password nella sezione <strong>Sign In</strong> della sidebar, per fare cio' e' stato implementato un meccanismo simile a quello usato per gli attributi dinamici andando pero' a chiamare l'endpoint che fornisce dati relativi all'otp passando sempre l'access_token ricevuto tramite l'endpoint di autenticazione.
+In <strong>/src/App/keycloak-theme/account/pages/OtpSection.tsx</strong> viene definito il componente responsabile della gestione delle configurazioni <strong>OTP</strong>, componente che vinene poi implementato in <strong>/src/App/keycloak-theme/account/pages/Password.tsx</strong>.
+Ulteriori dettagli sul funzionamento possono essere trovati nei commenti all'interno codice stesso.
 
 # I File Modificati
 

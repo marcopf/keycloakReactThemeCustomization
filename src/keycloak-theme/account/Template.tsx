@@ -20,6 +20,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { url, message } = kcContext;
 
+
     const { isReady } = usePrepareTemplate({
         "doFetchDefaultThemeResources": doUseDefaultCss,
         "styles": [
@@ -59,16 +60,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                         <ul className={"link-sublist collapse " + (kcContext.pageId == "sessions.ftl" || kcContext.pageId == "password.ftl" || kcContext.pageId == "totp.ftl" ? 'show' : '')} id="collapseOne">
                           <li>
                             { kcContext.pageId == "password.ftl" ? 
-                              <a className="list-item large medium right-icon active" href={url.passwordUrl}><span>{msg("password")}</span></a>
+                              <a className="list-item large medium right-icon active" href={url.passwordUrl}><span>Sign In</span></a>
                             :
-                              <a className="list-item large medium right-icon" href={url.passwordUrl}><span>{msg("password")}</span></a>
-                            }
-                          </li>
-                          <li>
-                            { kcContext.pageId == "totp.ftl" ? 
-                              <a className="list-item large medium right-icon active" href={url.totpUrl}><span>Totp</span></a>
-                            :
-                              <a className="list-item large medium right-icon" href={url.totpUrl}><span>Totp</span></a>
+                              <a className="list-item large medium right-icon" href={url.passwordUrl}><span>Sign In</span></a>
                             }
                           </li>
                           <li>
