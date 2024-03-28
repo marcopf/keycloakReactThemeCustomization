@@ -22,7 +22,7 @@ export default function Sessions(props: PageProps<Extract<KcContext, { pageId: "
         <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} active="sessions">
             <div className="row">
                 <div className={getClassName("kcContentWrapperClass")}>
-                    <div className="title col-12 mb-3">
+                    <div className="title col-12 mb-3 p-0">
                         <h2>{msg("sessionsHtmlTitle")}</h2>
                     </div>
                 </div>
