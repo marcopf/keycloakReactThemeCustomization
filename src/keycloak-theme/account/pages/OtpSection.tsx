@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react'
 const CLIENT_ID =               'account-console'
 const AUTH_ENDPOINT =           'http://localhost:8080/realms/master/protocol/openid-connect/auth';
 const TOKEN_ENDPOINT =          'http://localhost:8080/realms/master/protocol/openid-connect/token';
-const REDIRECT_URI =            'http://localhost:8080/realms/master/account/';
+const REDIRECT_URI =            'http://localhost:8080/realms/master/password/';
 const SCOPE =                   'openid'
 const INFO_ENDPOINT =           'http://localhost:8080/realms/master/account/credentials/'
 const NEW_OTP_CONFIGURATION =   'http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=account-console&redirect_uri=http://localhost:8080/realms/master/account&state=d7d1a0a3-fb42-4a4c-8d5d-9311c20a6388&response_mode=query&code_challenge=XSRahxpQ59S7SzBGlRXc41wXKTT2_e-EJ_GPcGMCi2E&http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=account-console&response_type=code&scope=openid&nonce=207f4110-eb53-431c-ad70-497f50800d2c&kc_action=CONFIGURE_TOTP&code_challenge_method=S256'
