@@ -8,6 +8,7 @@ import BuildForm from "./DynamicAttribute";
 export default function Account(props: PageProps<Extract<KcContext, { pageId: "account.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
+
     const { getClassName } = useGetClassName({
         doUseDefaultCss,
         "classes": {
@@ -35,8 +36,8 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
             <form action={url.accountUrl} className="form-horizontal mt-3" method="post">
                 <nav>
                 <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a className="nav-item nav-link active" id="nav-tab1-tab" data-bs-toggle="tab" href="#nav-tab1" role="tab" aria-controls="nav-tab1" aria-selected="true">{msg("defaultAttributes")}</a>
-                    <a className="nav-item nav-link" id="nav-tab2-tab" data-bs-toggle="tab" href="#nav-tab2" role="tab" aria-controls="nav-tab2" aria-selected="false">{msg("additionalAttributes")}</a>
+                    <a className="nav-item nav-link active" id="nav-tab1-tab" data-bs-toggle="tab" href="#nav-tab1" role="tab" aria-controls="nav-tab1" aria-selected="true">{msg("personalInfoHtmlTitle")}</a>
+                    <a className="nav-item nav-link" id="nav-tab2-tab" data-bs-toggle="tab" href="#nav-tab2" role="tab" aria-controls="nav-tab2" aria-selected="false">{msg("profileScopeConsentText")}</a>
                   </div>
                 </nav>
                 <div className="tab-content pt-5" id="nav-tabContent">

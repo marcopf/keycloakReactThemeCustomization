@@ -16,7 +16,8 @@ export default defineConfig({
       themeName: "testing",
       // See: https://docs.keycloakify.dev/environnement-variables
       extraThemeProperties: [
-        "MY_ENV_VARIABLE=${env.MY_ENV_VARIABLE:}"
+        "MY_ENV_VARIABLE=${env.MY_ENV_VARIABLE:}",
+        "ACCOUNT_DOMAIN=http://localhost:8080"
       ],
       // This is a hook that will be called after the build is done
       // but before the jar is created.  

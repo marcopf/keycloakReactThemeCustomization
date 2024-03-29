@@ -73,13 +73,13 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             { kcContext.pageId == "password.ftl" ? 
                               <a className="list-item large medium left-icon active" href={url.passwordUrl}>
                                 <span className="list-item-title-icon-wrapper">
-                                  <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-key"}></use></svg><span>Sign In</span>
+                                  <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-key"}></use></svg><span>{msg('signingInSidebarTitle')}</span>
                                 </span>
                               </a>
                             :
                               <a className="list-item large medium left-icon" href={url.passwordUrl}>
                                 <span className="list-item-title-icon-wrapper">
-                                  <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-key"}></use></svg><span>Sign In</span>
+                                  <svg className="icon icon-sm icon-primary" aria-hidden="true"><use href={sprites + "#it-key"}></use></svg><span>{msg('signingInSidebarTitle')}</span>
                                 </span>
                               </a>
                             }

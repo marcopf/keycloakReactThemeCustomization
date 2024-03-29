@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from 'react'
 const CLIENT_ID =               'account-console'
 const AUTH_ENDPOINT =           'http://localhost:8080/realms/master/protocol/openid-connect/auth';
 const TOKEN_ENDPOINT =          'http://localhost:8080/realms/master/protocol/openid-connect/token';
-const REDIRECT_URI =            'http://localhost:8080/realms/master/password/';
+const REDIRECT_URI =            'http://localhost:8080/realms/master/account/password/';
 const SCOPE =                   'openid'
 const INFO_ENDPOINT =           'http://localhost:8080/realms/master/account/credentials/'
 const NEW_OTP_CONFIGURATION =   'http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=account-console&redirect_uri=http://localhost:8080/realms/master/account&state=d7d1a0a3-fb42-4a4c-8d5d-9311c20a6388&response_mode=query&code_challenge=XSRahxpQ59S7SzBGlRXc41wXKTT2_e-EJ_GPcGMCi2E&http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=account-console&response_type=code&scope=openid&nonce=207f4110-eb53-431c-ad70-497f50800d2c&kc_action=CONFIGURE_TOTP&code_challenge_method=S256'
@@ -72,10 +72,10 @@ function getFormattedDate(milliseconds: number){
     return (year + "-" + addZero(month) + "-" + addZero(day) + " " + addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds));
 }
 
-function UserInfo(): JSX.Element {
+function UserInfo(props: any): JSX.Element {
     const {token} = useContext<IAuthContext>(AuthContext);
     const [totpList, setList] = useState<any[]>([]);
-
+    let message = props.message
     async function deleteTotp(e: any){
         console.log(token)
         if (!confirm("vuoi eleminare?"))
@@ -116,12 +116,12 @@ function UserInfo(): JSX.Element {
         {/* Definisco l'header della sezione OTP */}
         <div className="row my-5">
             <div className="col-8">
-                <h1>Otp Section</h1>
+                <h1>{message('configureAuthenticators')}</h1>
             </div>
             <div className="col-4 d-flex justify-content-end align-items-center">
 
                 {/* Preparo il link che portera' alla pagina di per aggiungere una nuova configurazione OTP */}
-                <a href={NEW_OTP_CONFIGURATION}>Configure new Otp</a>
+                <a href={NEW_OTP_CONFIGURATION}>{message('authenticatorSubTitle')}</a>
             </div>
         </div>
 
@@ -130,7 +130,7 @@ function UserInfo(): JSX.Element {
         {totpList.length == 0 ?
             <div className="row justify-content-center">
                 <div className="col-6 d-flex justify-content-center">
-                    <span className="text-danger">No Configuration Found!</span>
+                    <span className="text-danger">{message('notHaveAnyResource')}</span>
                 </div>
             </div> : <></>}
 
@@ -140,12 +140,12 @@ function UserInfo(): JSX.Element {
             return <>
 
                 <div className="mt-4 p-3 row align-items-center">
-                    <div className="col-4 d-flex flex-column"><strong className="me-3">Otp Label: </strong>{el.credential.userLabel}</div>
-                    <div className="col-4 d-flex flex-column"><strong className="me-3">Creation Date: </strong>{getFormattedDate(el.credential.createdDate)}</div>
+                    <div className="col-4 d-flex flex-column"><strong className="me-3">{message('totpDeviceName')}: </strong>{el.credential.userLabel}</div>
+                    <div className="col-4 d-flex flex-column"><strong className="me-3">{message('date')}: </strong>{getFormattedDate(el.credential.createdDate)}</div>
 
                     {/* Creo un pulsante atto alla rimozione della configurazione impostando l'id del bottonattributie uguale
                     all'id della configurazione, cosi che possa poi fare riferimento a quest'ultimo per poter poi eliminare la configurazione OTP */}
-                    <div className="col-4 d-flex justify-content-end"><button id={el.credential.id} className="btn btn-danger" onClick={deleteTotp}>Remove</button></div>
+                    <div className="col-4 d-flex justify-content-end"><button id={el.credential.id} className="btn btn-danger" onClick={deleteTotp}>{message('doRemove')}</button></div>
                 </div>
             </>
         })}
@@ -154,10 +154,12 @@ function UserInfo(): JSX.Element {
   }
 
   //definisco l'oggetto finale che si espandera' poi in una lista di configurazioni OTP dinamica, dipendenti dalle informazioni ottenute dal server di autenticazione
-  export default function OtpSection(): JSX.Element{
+  export default function OtpSection(props: any): JSX.Element{
+    let message = props.message
+
     return <>
         <AuthProvider authConfig={authConfig}>
-            <UserInfo ></UserInfo>
+            <UserInfo message={message}></UserInfo>
         </AuthProvider>
     </>
   }

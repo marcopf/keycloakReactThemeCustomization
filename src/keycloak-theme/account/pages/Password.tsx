@@ -2,6 +2,7 @@ import type { PageProps } from "keycloakify/account/pages/PageProps";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 import OtpSection from './OtpSection'
+import sprites from './../assets/sprites.svg'
 
 export default function LogoutConfirm(fprops: any) {
     let props = fprops as PageProps<Extract<KcContext, { pageId: "password.ftl" }>, I18n>
@@ -20,7 +21,7 @@ export default function LogoutConfirm(fprops: any) {
                     <h2>{msg("changePasswordHtmlTitle")}</h2>
                 </div>
                 <div className="col-md-4 subtitle">
-                    <span className="subtitle">{msg("allFieldsRequired")}</span>
+                    <span className="subtitle">*{msg("requiredFields")}</span>
                 </div>
             </div>
             <form action={url.passwordUrl} className="form-horizontal mt-3" method="post">
@@ -35,18 +36,31 @@ export default function LogoutConfirm(fprops: any) {
                 />
                 {password.passwordSet && (
                     <div className="form-group">
-                        <label className="active control-label" htmlFor="password">{msg("password")}</label>
-                        <input type="password" className="form-control" id="password" name="password" autoComplete="current-password" />
+                        <label htmlFor="password">{msg("password")}</label>
+                        <input type="password" data-bs-input className="form-control input-password" id="password" name="password" aria-labelledby="infoPassword"/>
+                        <span className="password-icon" aria-hidden="true">
+                          <svg className="password-icon-visible icon icon-sm"><use href={sprites + '#it-password-visible'}></use></svg>
+                          <svg className="password-icon-invisible icon icon-sm d-none"><use href={sprites + "#it-password-invisible"}></use></svg>
+                        </span>
                     </div>
                 )}
                 <input type="hidden" id="stateChecker" name="stateChecker" value={stateChecker} />
+
                 <div className="form-group">
-                    <label className="active control-label" htmlFor="password-new">{msg("passwordNew")}</label>
-                    <input type="password" className="form-control" id="password-new" name="password-new" autoComplete="new-password" aria-describedby="formGroupExampleInputWithHelpDescription"/>
+                    <label htmlFor="password-new">{msg("passwordNew")}</label>
+                    <input type="password" data-bs-input className="form-control input-password" id="password-new" name="password-new" aria-labelledby="infoPassword"/>
+                    <span className="password-icon" aria-hidden="true">
+                      <svg className="password-icon-visible icon icon-sm"><use href={sprites + '#it-password-visible'}></use></svg>
+                      <svg className="password-icon-invisible icon icon-sm d-none"><use href={sprites + "#it-password-invisible"}></use></svg>
+                    </span>
                 </div>
                 <div className="form-group">
-                    <label className="active control-label" htmlFor="password-confirm">{msg("passwordConfirm")}</label>
-                    <input type="password" className="form-control" id="password-confirm" name="password-confirm" autoComplete="new-password" />
+                    <label htmlFor="password-confirm">{msg("passwordConfirm")}</label>
+                    <input type="password" data-bs-input className="form-control input-password" id="password-confirm" name="password-confirm" aria-labelledby="infoPassword"/>
+                    <span className="password-icon" aria-hidden="true">
+                      <svg className="password-icon-visible icon icon-sm"><use href={sprites + '#it-password-visible'}></use></svg>
+                      <svg className="password-icon-invisible icon icon-sm d-none"><use href={sprites + "#it-password-invisible"}></use></svg>
+                    </span>
                 </div>
                 <div className="form-group">
                     <div id="kc-form-buttons" className="submit">
@@ -63,7 +77,7 @@ export default function LogoutConfirm(fprops: any) {
                     </div>
                 </div>
             </form>
-            <OtpSection></OtpSection>
+            <OtpSection message={msg}></OtpSection>
         </Template>
     );
 }
