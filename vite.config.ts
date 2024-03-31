@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react'
 import commonjs from "vite-plugin-commonjs";
 import { keycloakify } from "keycloakify/vite-plugin";
 
+const PROTOCOL = 'http';
+const IP = 'localhost'
+const PORT = '8080'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -17,10 +20,11 @@ export default defineConfig({
       // See: https://docs.keycloakify.dev/environnement-variables
       extraThemeProperties: [
         "MY_ENV_VARIABLE=${env.MY_ENV_VARIABLE:}",
-        "WELL_KNOWN_API=http://localhost:8080/realms/master/.well-known/openid-configuration",
-        "OTP_INFO_ENDPOINT=http://localhost:8080/realms/master/account/credentials/",
-        "NEW_OTP_CONFIGURATION=http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=account-console&redirect_uri=http://localhost:8080/realms/master/account&state=d7d1a0a3-fb42-4a4c-8d5d-9311c20a6388&response_mode=query&code_challenge=XSRahxpQ59S7SzBGlRXc41wXKTT2_e-EJ_GPcGMCi2E&http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=account-console&response_type=code&scope=openid&nonce=207f4110-eb53-431c-ad70-497f50800d2c&kc_action=CONFIGURE_TOTP&code_challenge_method=S256",
-        "USER_ATTRIBUTE_ENDPOINT=http://localhost:8080/realms/master/account/?userProfileMetadata=true",
+        
+        `WELL_KNOWN_API=${PROTOCOL}://${IP}:${PORT}/realms/master/.well-known/openid-configuration`,
+        `OTP_INFO_ENDPOINT=${PROTOCOL}://${IP}:${PORT}/realms/master/account/credentials/`,
+        `NEW_OTP_CONFIGURATION=${PROTOCOL}://${IP}:${PORT}//realms/master/protocol/openid-connect/auth`,
+        `USER_ATTRIBUTE_ENDPOINT=${PROTOCOL}://${IP}:${PORT}/realms/master/account/?userProfileMetadata=true`,
       ],
       // This is a hook that will be called after the build is done
       // but before the jar is created.  

@@ -102,7 +102,7 @@ function UserInfo(props: any): JSX.Element {
             <div className="col-4 d-flex justify-content-end align-items-center">
 
                 {/* Preparo il link che portera' alla pagina di per aggiungere una nuova configurazione OTP */}
-                <a href={props.props.kcContext.properties.NEW_OTP_CONFIGURATION}>{message('authenticatorSubTitle')}</a>
+                <a href={props.props.kcContext.properties.NEW_OTP_CONFIGURATION + `?client_id=account-console&redirect_uri=${props.issuer}/account/password&state=d7d1a0a3-fb42-4a4c-8d5d-9311c20a6388&response_mode=query&code_challenge=XSRahxpQ59S7SzBGlRXc41wXKTT2_e-EJ_GPcGMCi2E&response_type=code&scope=openid&nonce=207f4110-eb53-431c-ad70-497f50800d2c&kc_action=CONFIGURE_TOTP&code_challenge_method=S256`}>{message('authenticatorSubTitle')}</a>
             </div>
         </div>
 
@@ -173,7 +173,7 @@ function UserInfo(props: any): JSX.Element {
 
         return <>
             <AuthProvider authConfig={authConfig}>
-                <UserInfo msg={props.msg} props={props.props}></UserInfo>
+                <UserInfo msg={props.msg} props={props.props} issuer={wellKnown.issuer}></UserInfo>
             </AuthProvider>
         </>
     }

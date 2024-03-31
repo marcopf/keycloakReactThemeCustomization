@@ -94,10 +94,13 @@ Tutti i file che si vogliono utilizzare all'interno del progento dovrebbero esse
 In questa cartella possiamo inserire Font, file js, file css e immagini.
 sara` poi possibile urilizzarli nel progetto tramite <strong>import</strong>
 
+# Configurazioni Aggiuntive
+
+È possibile modificare il nome del tema in <strong>vite.config.ts</strong> modificando la proprieta' themeName (riga 16).<br>
+Nello stesso file e' possibile specificare il domain per gli endpoint di keycloak potendo modificare <strong>Protocollo</strong>, <strong>Ip</strong> e <strong>Porta</strong> in modo semplice e veloce, per quanto riguarda gli endpoint di autorizzazione questi sono ricavati dall'endpoint <strong>WELL KNOW</strong>.
+
 # Compilazione e Startup
 È possibile compilare il progetto tramite il comando
 <strong>yarn install</strong> && <strong>yarn build-keycloak-theme</strong>
 verra' generata la cartella dist_keycloak nella quale e' presente uno script atto a testare il tema sviluppato facendo partire un container con dentro keycloak e il nostro tema.
 Sara' presente inoltre la cartella /dist_keycloak/target dove troveremo il .jar che contiene il nostro tema potendolo cosi importare nella cartella providers di keycloak
-
-È possibile modificare il nome del tema in <strong>vite.config.ts</strong> modificando la proprieta' themeName (riga 16).
