@@ -12,7 +12,7 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
 		}
 	],
 	mockProperties: {
-		MY_ENV_VARIABLE: "Mocked value"
+		MY_ENV_VARIABLE: "Mocked value",
 	},
 });
 

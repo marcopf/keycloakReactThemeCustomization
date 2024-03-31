@@ -1,56 +1,6 @@
 import { AuthContext, AuthProvider, IAuthContext, TAuthConfig, TRefreshTokenExpiredEvent } from "react-oauth2-code-pkce"
 import { useContext, useEffect, useState } from 'react'
 
-//----
-//list of all string and endpoint needed to perform the pkce call and retrieve the attribute info
-//----
-
-const CLIENT_ID =               'account-console'
-const AUTH_ENDPOINT =           'http://localhost:8080/realms/master/protocol/openid-connect/auth';
-const TOKEN_ENDPOINT =          'http://localhost:8080/realms/master/protocol/openid-connect/token';
-const REDIRECT_URI =            'http://localhost:8080/realms/master/account/password/';
-const SCOPE =                   'openid'
-const INFO_ENDPOINT =           'http://localhost:8080/realms/master/account/credentials/'
-const NEW_OTP_CONFIGURATION =   'http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=account-console&redirect_uri=http://localhost:8080/realms/master/account&state=d7d1a0a3-fb42-4a4c-8d5d-9311c20a6388&response_mode=query&code_challenge=XSRahxpQ59S7SzBGlRXc41wXKTT2_e-EJ_GPcGMCi2E&http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=account-console&response_type=code&scope=openid&nonce=207f4110-eb53-431c-ad70-497f50800d2c&kc_action=CONFIGURE_TOTP&code_challenge_method=S256'
-
-//----
-
-const authConfig: TAuthConfig = {
-    clientId: CLIENT_ID,
-    authorizationEndpoint: AUTH_ENDPOINT,
-    tokenEndpoint: TOKEN_ENDPOINT,
-    redirectUri: REDIRECT_URI,
-    scope: SCOPE,
-    onRefreshTokenExpire: (event: TRefreshTokenExpiredEvent) => window.confirm('Session expired. Refresh page to continue using the site?') && event.login(),
-  }
-
-//funzione asincrona che ottiene le informazioni relative alle configurazioni otp attive
-//  token: rappresenta l'access_token che verra' poi utilizzato nell'authorization header della richiesta
-async function getInfo(token: string) {
-
-    // effettuo la richesta tramite fetch prestando attenzione all'asincronicita'
-    const res = await fetch(INFO_ENDPOINT, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + token
-        }
-    })
- 
-    //parso la risposta come json
-    let resJson = {};
-    try {
-        if (res.ok)
-            resJson = await res.json();
-    } catch (e) {
-        console.log(e)
-    }
-
-    //altrimenti torno un'oggetto vuoto "{}"
-    return resJson;
-}
-
 // Aggiunge lo zero iniziale se il numero e' minore di 10
 function addZero(num: number) {
     return (num < 10 ? '0' : '') + num;
@@ -75,12 +25,43 @@ function getFormattedDate(milliseconds: number){
 function UserInfo(props: any): JSX.Element {
     const {token} = useContext<IAuthContext>(AuthContext);
     const [totpList, setList] = useState<any[]>([]);
-    let message = props.message
+    let message = props.msg
+
+    //funzione asincrona che ottiene le informazioni relative alle configurazioni otp attive
+    //  token: rappresenta l'access_token che verra' poi utilizzato nell'authorization header della richiesta
+    async function getInfo(token: string) {
+
+        // effettuo la richesta tramite fetch prestando attenzione all'asincronicita'
+        const res = await fetch(props.props.kcContext.properties.OTP_INFO_ENDPOINT, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + token
+            }
+        })
+    
+        //parso la risposta come json
+        let resJson = {};
+        try {
+            if (res.ok)
+                resJson = await res.json();
+        } catch (e) {
+            console.log(e)
+        }
+
+        //altrimenti torno un'oggetto vuoto "{}"
+        return resJson;
+    }
+
     async function deleteTotp(e: any){
-        console.log(token)
+        let target = e.target;
+
+        if (target.tagName == 'SPAN')
+            target = target.parentNode;
         if (!confirm("vuoi eleminare?"))
             return;
-        const res = await fetch(INFO_ENDPOINT + e.target.getAttribute('id'), {
+        const res = await fetch(props.props.kcContext.properties.OTP_INFO_ENDPOINT + target.getAttribute('id'), {
             method: 'DELETE',
             headers: {
                 "Authorization": "Bearer " + token,
@@ -121,7 +102,7 @@ function UserInfo(props: any): JSX.Element {
             <div className="col-4 d-flex justify-content-end align-items-center">
 
                 {/* Preparo il link che portera' alla pagina di per aggiungere una nuova configurazione OTP */}
-                <a href={NEW_OTP_CONFIGURATION}>{message('authenticatorSubTitle')}</a>
+                <a href={props.props.kcContext.properties.NEW_OTP_CONFIGURATION}>{message('authenticatorSubTitle')}</a>
             </div>
         </div>
 
@@ -153,13 +134,52 @@ function UserInfo(props: any): JSX.Element {
     </>
   }
 
+  interface WellKnow {
+    [key: string]: string
+  }
+
   //definisco l'oggetto finale che si espandera' poi in una lista di configurazioni OTP dinamica, dipendenti dalle informazioni ottenute dal server di autenticazione
   export default function OtpSection(props: any): JSX.Element{
-    let message = props.message
 
-    return <>
-        <AuthProvider authConfig={authConfig}>
-            <UserInfo message={message}></UserInfo>
-        </AuthProvider>
-    </>
+    const [wellKnown, setWellKnown] = useState({} as WellKnow);
+    const [contentLoaded, setContentLoaded] = useState(false);
+
+    //ricava i dati dall'endpoint WELL KNOWN di keycloak
+    useEffect(()=>{
+        const fetchData = async () => {
+            const res = await fetch(props.props.kcContext.properties.WELL_KNOWN_API);
+
+            if (res.ok){
+                let resJson = await res.json();
+                setWellKnown(resJson as WellKnow);
+                setContentLoaded(true);
+            }
+        }
+
+        fetchData();
+    }, []);
+
+    //aspetta che gli endpoint siano stati ricavati, una volta ottenuti vie effetuata la chimata OAUTH2
+    if (contentLoaded){
+
+        const authConfig: TAuthConfig = {
+            clientId: 'account-console',
+            authorizationEndpoint: wellKnown.authorization_endpoint,
+            tokenEndpoint: wellKnown.token_endpoint,
+            redirectUri: wellKnown.issuer + '/account',
+            scope: 'openid',
+            onRefreshTokenExpire: (event: TRefreshTokenExpiredEvent) => window.confirm('Session expired. Refresh page to continue using the site?') && event.login(),
+        }
+
+        return <>
+            <AuthProvider authConfig={authConfig}>
+                <UserInfo msg={props.msg} props={props.props}></UserInfo>
+            </AuthProvider>
+        </>
+    }
+
+    //se i dati richiesti tramite fetch non sono ancora disponibili o sono presenti errori ritorno un'oggetto vuoto
+    return (
+        <></>
+    )
   }

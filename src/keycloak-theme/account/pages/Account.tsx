@@ -76,7 +76,7 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
 
                   </div>
                   <div className="tab-pane p-0 fade" id="nav-tab2" role="tabpanel" aria-labelledby="nav-tab2-tab">
-                    <BuildForm></BuildForm>
+                    <BuildForm props={props}></BuildForm>
                   </div>
                 </div>
 

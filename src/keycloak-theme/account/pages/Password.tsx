@@ -4,9 +4,7 @@ import type { I18n } from "../i18n";
 import OtpSection from './OtpSection'
 import sprites from './../assets/sprites.svg'
 
-export default function LogoutConfirm(fprops: any) {
-    let props = fprops as PageProps<Extract<KcContext, { pageId: "password.ftl" }>, I18n>
-    console.log(fprops, props)
+export default function LogoutConfirm(props: PageProps<Extract<KcContext, { pageId: "password.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
 
@@ -77,7 +75,7 @@ export default function LogoutConfirm(fprops: any) {
                     </div>
                 </div>
             </form>
-            <OtpSection message={msg}></OtpSection>
+            <OtpSection msg={msg} props={props}></OtpSection>
         </Template>
     );
 }
