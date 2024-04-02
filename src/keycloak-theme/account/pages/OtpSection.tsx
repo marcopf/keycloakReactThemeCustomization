@@ -1,6 +1,41 @@
 import { AuthContext, AuthProvider, IAuthContext, TAuthConfig, TRefreshTokenExpiredEvent } from "react-oauth2-code-pkce"
 import { useContext, useEffect, useState } from 'react'
 
+function getCryptoRandomBetween(min: any, max: any):any{
+    //the highest random value that crypto.getRandomValues could store in a Uint32Array
+    var MAX_VAL = 4294967295;
+    
+    //find the number of randoms we'll need to generate in order to give every number between min and max a fair chance
+    var numberOfRandomsNeeded = Math.ceil((max - min) / MAX_VAL);
+    
+    //grab those randoms
+    var cryptoRandomNumbers = new Uint32Array(numberOfRandomsNeeded);
+    crypto.getRandomValues(cryptoRandomNumbers);
+    
+    //add them together
+    for(var i = 0, sum = 0; i < cryptoRandomNumbers.length; i++){
+      sum += cryptoRandomNumbers[i];
+    }
+    
+    //and divide their sum by the max possible value to get a decimal
+    var randomDecimal = sum / (MAX_VAL * numberOfRandomsNeeded);
+    
+    //if result is 1, retry. otherwise, return decimal.
+    return randomDecimal === 1 ? getCryptoRandomBetween(min, max) : Math.floor(randomDecimal * (max - min + 1) + min);
+}
+  
+  function getRandomChar(str: string){
+    return str.charAt(getCryptoRandomBetween(0, str.length - 1));
+  }
+  
+  function getCsprngString():any {
+    let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    for(var i = 0, str = ""; i < 60; i++) str += getRandomChar(characters);
+    return str;
+  };
+  
+
 // Aggiunge lo zero iniziale se il numero e' minore di 10
 function addZero(num: number) {
     return (num < 10 ? '0' : '') + num;
@@ -102,7 +137,7 @@ function UserInfo(props: any): JSX.Element {
             <div className="col-4 d-flex justify-content-end align-items-center">
 
                 {/* Preparo il link che portera' alla pagina di per aggiungere una nuova configurazione OTP */}
-                <a href={props.props.kcContext.properties.NEW_OTP_CONFIGURATION + `?client_id=account-console&redirect_uri=${props.issuer}/account/password&state=d7d1a0a3-fb42-4a4c-8d5d-9311c20a6388&response_mode=query&code_challenge=XSRahxpQ59S7SzBGlRXc41wXKTT2_e-EJ_GPcGMCi2E&response_type=code&scope=openid&nonce=207f4110-eb53-431c-ad70-497f50800d2c&kc_action=CONFIGURE_TOTP&code_challenge_method=S256`}>{message('authenticatorSubTitle')}</a>
+                <a href={props.authorizationEndpoint + `?client_id=account-console&redirect_uri=${props.issuer}/account/password&state=${getCsprngString()}&response_mode=query&code_challenge=XSRahxpQ59S7SzBGlRXc41wXKTT2_e-EJ_GPcGMCi2E&response_type=code&scope=openid&nonce=207f4110-eb53-431c-ad70-497f50800d2c&kc_action=CONFIGURE_TOTP&code_challenge_method=S256`}>{message('authenticatorSubTitle')}</a>
             </div>
         </div>
 
@@ -173,7 +208,7 @@ function UserInfo(props: any): JSX.Element {
 
         return <>
             <AuthProvider authConfig={authConfig}>
-                <UserInfo msg={props.msg} props={props.props} issuer={wellKnown.issuer}></UserInfo>
+                <UserInfo msg={props.msg} props={props.props} issuer={wellKnown.issuer} authorizationEndpoint={wellKnown.authorization_endpoint}></UserInfo>
             </AuthProvider>
         </>
     }

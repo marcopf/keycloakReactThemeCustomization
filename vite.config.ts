@@ -23,7 +23,6 @@ export default defineConfig({
         
         `WELL_KNOWN_API=${PROTOCOL}://${IP}:${PORT}/realms/master/.well-known/openid-configuration`,
         `OTP_INFO_ENDPOINT=${PROTOCOL}://${IP}:${PORT}/realms/master/account/credentials/`,
-        `NEW_OTP_CONFIGURATION=${PROTOCOL}://${IP}:${PORT}//realms/master/protocol/openid-connect/auth`,
         `USER_ATTRIBUTE_ENDPOINT=${PROTOCOL}://${IP}:${PORT}/realms/master/account/?userProfileMetadata=true`,
       ],
       // This is a hook that will be called after the build is done
