@@ -1,6 +1,6 @@
 
 
-# introduzione
+# Introduzione :book:
 Questo repository contiene tutte le risorse e le istruzioni necessarie per personalizzare il tema dell'account utente in Keycloak. Keycloak, un open-source Identity and Access Management solution, offre flessibilità nella gestione degli utenti, delle sessioni, e nella sicurezza delle applicazioni. L'applicazione del tema e` stato possibile sfruttando la base messa a disposizione da https://github.com/keycloakify/keycloakify-starter.
 
 # Il tema
@@ -8,7 +8,7 @@ keycloakify offre la possibilità di customizzare in profondità ogni pagina di 
 Per aderirire alle linee guida della pubblica amministrazione e` stato scelto <strong>Bootstrap-italia</strong> che permette un rapido sviluppo del frontend mantenedo lo stile che caratterizza i le pagine web dei servizi pubblici...
 
 
-# I File Aggiunti
+# File Aggiunti :heavy_plus_sign:
 Come precedentemente accennato la base e` quella messa a disposizione da keycloakify aggiungendo dei file relativi alla pagina di <strong>Account Management</strong>, di seguito l'elenco dei file aggiunti.
 <ul>
   <li>
@@ -62,12 +62,12 @@ In keycloak 23 non era possibile (di default) aggiungere attributi dinamici per 
 </ul>
 Il file in cui viene svolto il tutto e' <strong class="subTitle">DynamicAttribute.tsx</strong> situato in <span class="path">/src/App/keycloak-theme/account/pages</span>
 
-# Otp Configuration
+# Otp Configuration :closed_lock_with_key:
 Nel tema di base messo a disposizione da keycloakIfy la sezione otp carica un "card" a destra della sidebar principale,per emulare meglio quello che e' il piu' recente tema di keycloak la parte <strong>OTP</strong> e' stata implementata insieme al form di cambio password nella sezione <strong>Sign In</strong> della sidebar, per fare cio' e' stato implementato un meccanismo simile a quello usato per gli attributi dinamici andando pero' a chiamare l'endpoint che fornisce dati relativi all'otp passando sempre l'access_token ricevuto tramite l'endpoint di autenticazione.
 In <strong>/src/App/keycloak-theme/account/pages/OtpSection.tsx</strong> viene definito il componente responsabile della gestione delle configurazioni <strong>OTP</strong>, componente che vinene poi implementato in <strong>/src/App/keycloak-theme/account/pages/Password.tsx</strong>.
 Ulteriori dettagli sul funzionamento possono essere trovati nei commenti all'interno codice stesso.
 
-# I File Modificati
+# File Modificati :pencil2:
 
 Per implementare boostrap-italia e integrare le pagine prima citate sono stati modificati i seguenti file:
 
@@ -89,17 +89,17 @@ Per implementare boostrap-italia e integrare le pagine prima citate sono stati m
   </li>
 </ul>
 
-# Assets
+# Assets :floppy_disk:
 Tutti i file che si vogliono utilizzare all'interno del progento dovrebbero essere poszionati in <strong>/src/Appkeycloak-theme/NOME-TEMA/assets</strong>.
 In questa cartella possiamo inserire Font, file js, file css e immagini.
 sara` poi possibile urilizzarli nel progetto tramite <strong>import</strong>
 
-# Configurazioni Aggiuntive
+# Configurazioni Aggiuntive :wrench:
 
 È possibile modificare il nome del tema in <strong>vite.config.ts</strong> modificando la proprieta' themeName (riga 16).<br>
 Nello stesso file e' possibile specificare il domain per gli endpoint di keycloak potendo modificare <strong>Protocollo</strong>, <strong>Ip</strong> e <strong>Porta</strong> in modo semplice e veloce, per quanto riguarda gli endpoint di autorizzazione questi sono ricavati dall'endpoint <strong>WELL KNOW</strong>.
 
-# Compilazione e Startup
+# Compilazione e Startup :rocket:
 È possibile compilare il progetto tramite il comando
 <strong>yarn install</strong> && <strong>yarn build-keycloak-theme</strong>
 verra' generata la cartella dist_keycloak nella quale e' presente uno script atto a testare il tema sviluppato facendo partire un container con dentro keycloak e il nostro tema.
